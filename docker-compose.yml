@@ -1,0 +1,28 @@
+version: '2.1'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.15-alpine
+    volumes:
+    - ./backend/public:/var/www/backend/public
+    - ./nginx:/etc/nginx/conf.d
+    ports:
+    - '80:80'
+    networks:
+    - landings
+  backend:
+    container_name: backend
+    build:
+      context: backend
+    volumes:
+    - ./backend:/var/www/backend
+    - vendor:/var/www/backend/vendor
+    ports:
+    - '8000:8000'
+    - '9000:9000'
+    networks:
+    - landings
+networks:
+  landings: {}
+volumes:
+  vendor: {}
