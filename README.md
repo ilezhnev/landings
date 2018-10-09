@@ -2,7 +2,11 @@
 ## Requirements
 * docker
 * docker-compose
-* Add line to /etc/hosts: `127.0.0.1 api.landings.int`
+* Add line to /etc/hosts:
+```
+127.0.0.1 api.landings.int
+127.0.0.1 angular.landings.int
+```
 ## Installation
 ```docker-compose up --build```
 ## Idea

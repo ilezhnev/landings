@@ -4,8 +4,12 @@ services:
     container_name: nginx
     image: nginx:1.15-alpine
     volumes:
-    - ./backend/public:/var/www/backend/public
+    - ./backend/public:/var/www/backend/public:ro
+    - ./frontend:/var/www/frontend:ro
     - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - backend
+      - frontend
     ports:
     - '80:80'
     networks:
@@ -16,12 +20,22 @@ services:
       context: backend
     volumes:
     - ./backend:/var/www/backend
-    - vendor:/var/www/backend/vendor
+    - vendor:/var/www/backend/vendor:rw
     ports:
     - '8000:8000'
     - '9000:9000'
     networks:
     - landings
+  frontend:
+    container_name: frontend
+    build:
+      context: frontend
+    volumes:
+    - ./frontend:/var/www/frontend:rw
+    ports:
+      - "4200:4200"
+    networks:
+      - landings
 networks:
   landings: {}
 volumes:
