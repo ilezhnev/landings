@@ -14,5 +14,6 @@
 Generating landing page and manage landing from one Admin panel.
 ## Architecture
 Backend - Symfony 4<br>
+Documentation (Swagger) - NelmioApiDocBundle (http://api.landings.int/api/doc)<br>
 Database - PostgreSQL<br>
 Frontend - Angular 6
