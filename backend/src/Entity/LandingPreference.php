@@ -27,6 +27,11 @@ class LandingPreference
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $url;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $title;
 
     /**
@@ -57,6 +62,18 @@ class LandingPreference
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }
