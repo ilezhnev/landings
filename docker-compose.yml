@@ -8,8 +8,8 @@ services:
     - ./frontend:/var/www/frontend:ro
     - ./nginx:/etc/nginx/conf.d
     depends_on:
-      - backend
-      - frontend
+    - backend
+    - frontend
     ports:
     - '80:80'
     networks:
@@ -21,11 +21,28 @@ services:
     volumes:
     - ./backend:/var/www/backend
     - vendor:/var/www/backend/vendor:rw
+    depends_on:
+    - postgresql
     ports:
     - '8000:8000'
     - '9000:9000'
     networks:
     - landings
+  postgresql:
+    container_name: postgresql
+    image: postgres:9.6-alpine
+    environment:
+    - POSTGRES_HOST=postgresql
+    - POSTGRES_PORT=5432
+    - POSTGRES_DB=landings
+    - POSTGRES_USER=ilezhnev
+    - POSTGRES_PASSWORD=SelfTestingPassword
+    volumes:
+    - database:/var/lib/postgresql/data:rw
+    networks:
+    - landings
+    ports:
+    - "5432:5432"
   frontend:
     container_name: frontend
     build:
@@ -33,10 +50,11 @@ services:
     volumes:
     - ./frontend:/var/www/frontend:rw
     ports:
-      - "4200:4200"
+    - "4200:4200"
     networks:
-      - landings
+    - landings
 networks:
   landings: {}
 volumes:
   vendor: {}
+  database: {}
