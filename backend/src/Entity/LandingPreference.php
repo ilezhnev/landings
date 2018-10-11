@@ -5,6 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * LandingPreference
+ *
+ * @ORM\Table(name="landings_preference")
  * @ORM\Entity(repositoryClass="App\Repository\LandingPreferenceRepository")
  */
 class LandingPreference
